@@ -86,15 +86,14 @@
 														<?php endif; ?>
 													</a>
 												</td>
-												<?php
-												if($user['role']==1){
-													echo '<td class="text-center">
-													<a class="btn btn-success btn-xs" href="<?php echo base_url() ?>admin/category/update/'.$row['id'] .'" role = "button">
-													<span class="glyphicon glyphicon-edit"></span>Sửa
-													</a>
-													</td>';
-												}
-												?>
+												<?php if($user['role']==1){ ?>
+													<td class="text-center">
+														<a class="btn btn-success btn-xs" href="<?php echo base_url('admin/category/update/'.$row['id']); ?>" role = "button">
+														<span class="glyphicon glyphicon-edit"></span>Sửa
+														</a>
+													</td>
+												<?php } ?>
+												
 												
 												<td class="text-center">
 													<a class="btn btn-danger btn-xs" href="<?php echo base_url() ?>admin/category/trash/<?php echo $row['id'] ?>" onclick="return confirm('Xác nhận xóa loại sản phẩm này ?')" role = "button">

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 <header class="main-header">
     <a href="<?php echo base_url()?>admin" class="logo">
         <span class="logo-lg">Quản trị hệ thống</span>
@@ -10,7 +11,7 @@
             <ul class="nav navbar-nav" style="height: 52px;  padding: 1px">
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-bell-o"></i>
+                      <i class="fa-sharp fa-solid fa-bell" style="font-size: 17px;"></i>
                       <span class="label label-warning">
                           <?php
                           $approved = $this->Morders->orders_count_header();

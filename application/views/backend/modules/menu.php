@@ -68,13 +68,13 @@
                         <i class="fa fa-cogs"></i> Cấu hình
                     </a>
                 </li>
-                <?php if($user['role'] == 1){
-                echo  '<li>
-                    <a href="<?php echo base_url() ?>admin/useradmin">
+                <?php if($user['role'] == 1){ ?>
+                <li>
+                    <a href="<?php echo base_url('admin/useradmin') ?>">
                         <i class="fa fa-users"></i> Nhân viên
                     </a>
-                </li>';
-                } ?>
+                </li>
+                <?php } ?>
             </ul>
         </li>
         <li><a href="admin/user/logout.html"><i class="fa fa-sign-out text-red"></i> <span>Thoát</span></a></li>
