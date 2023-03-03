@@ -12,7 +12,7 @@
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa-sharp fa-solid fa-bell" style="font-size: 17px;"></i>
-                      <span class="label label-warning">
+                      <span class="label" style="background: red;">
                           <?php
                           $approved = $this->Morders->orders_count_header();
                           $not_approved = $this->Morders->orders_count_header_not();
@@ -24,7 +24,7 @@
                       <li>
                         <ul class="menu">
                           <li>
-                            <a href="#">
+                            <a href="<?php echo base_url('admin/orders') ?>">
                               <i class="fa fa-users text-aqua"></i>
                               <?php echo $this->Morders->orders_count_header_not();?> 
                               Đơn hàng chưa duyệt
@@ -35,7 +35,7 @@
               <li>
                 <ul class="menu">
                   <li>
-                    <a href="#">
+                    <a href="<?php echo base_url('admin/orders') ?>">
                       <i class="fa fa-users text-aqua"></i> 
                       <?php echo $this->Morders->orders_count_header();?> 
                       Đơn hàng đang giao
@@ -43,7 +43,7 @@
               </li>
           </ul>
       </li>
-      <li class="footer"><a href="<?php echo base_url() ?>admin/orders">Xem</a></li>
+      <li class="footer"><a href="<?php echo base_url('admin/orders') ?>">Xem</a></li>
   </ul>
 </li>
 <li style="height: 52px">

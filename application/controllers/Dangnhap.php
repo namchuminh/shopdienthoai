@@ -92,6 +92,9 @@ class Dangnhap extends CI_Controller {
                 'status' => 1,
             );
 
+            $this->load->model('backend/Muser');
+            $result = $this->Muser->getConfig();
+
             //Lưu tt mã và ngày giới hạn để gửi mail
             $tempcoupon = $newcoupon['code'];
             $tempdatelimit = $newcoupon['expiration_date'];
@@ -100,26 +103,27 @@ class Dangnhap extends CI_Controller {
             $this->Mcustomer->customer_insert($data);
             // gui mail ma giam gia
             $email = $this->input->post('email');
+
             $this->load->library('email');
+
             $this->load->library('parser');
             $this->email->clear();
+
             $config['protocol']    = 'smtp';
-            $config['smtp_host']    = 'ssl://smtp.gmail.com';
+            $config['smtp_host']    = 'ssl://smtp.googlemail.com';
             $config['smtp_port']    = '465';
-            $config['smtp_timeout'] = '7';
-            $config['smtp_user']    = 'sale.smart.store.2019@gmail.com';
-            $config['smtp_pass']    = 'cqfmfmrtudhcmahw';
+            $config['smtp_user']    = 'laptrinhtudau@gmail.com';
+            $config['smtp_pass']    = 'qgnkohpnjlrdafxk';
             $config['charset']    = 'utf-8';
             $config['newline']    = "\r\n";
             $config['wordwrap'] = TRUE;
             $config['mailtype'] = 'html';
             $config['validation'] = TRUE;   
             $this->email->initialize($config);
-            $this->email->from('sale.smart.store.2019@gmail.com', 'Smart Store');
+            $this->email->from($result[0]['mail_smtp'], 'Smart Store');
             $this->email->to($email);
             $this->email->subject('Hệ thống Smart Store - Quà thành viên mới');
-            $this->email->message('Bạn đã trở thành thành viên mới của cửa hàng Smart Store, Cửa hàng tặng bạn 1 mã giảm giá giảm 100.000 đ : '.$tempcoupon.' , Mã này có giá trị tới ngày '.$tempdatelimit.'
-                Hãy sử dụng tài khoản để mua hàng để tích lũy nhận thêm nhiều ưu đãi !!!!');
+            $this->email->message('Bạn đã trở thành thành viên mới của cửa hàng Smart Store, Cửa hàng tặng bạn 1 mã giảm giá giảm 100.000 đ : '.$tempcoupon.'<br>Mã này có giá trị tới ngày '.$tempdatelimit.'<br>Hãy sử dụng tài khoản để mua hàng để tích lũy nhận thêm nhiều ưu đãi !!!! <br>Cảm ơn quý khách đã ghé thăm cửa hàng!');
             $this->email->send();
             $this->data['success']='Đăng ký thành công! Bạn đã nhận được 1 mã giảm giá cho thành viên mới, vui lòng kiểm tra email !!';
 

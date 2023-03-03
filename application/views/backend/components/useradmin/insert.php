@@ -56,7 +56,6 @@
                                 <div class="form-group">
                                     <label>Quyền<span class = "maudo">(*)</span></label>
                                     <select name="role" class="form-control">
-                                        <option value = "">[--Chọn danh mục--]</option>
                                             <?php  
                                                 $list=$this->Muser->groupadmin_list();
                                                 $option_parentid="";

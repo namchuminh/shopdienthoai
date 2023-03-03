@@ -83,14 +83,14 @@ if(!$this->session->userdata('cart')){
                                     </td>
                                 </tr>
 
-                                <tr>
+                                <tr class="sudungma">
                                     <td class="width30 text-right td-right-order">Mã giảm giá (nếu có):</td>
                                     <td>
                                          <input id="coupon" style="border-radius: 5px; border-color: #0f9ed8;" type="text" class="form-control" placeholder="Mã giảm giá" name="coupon">
                                         <div class="error" id="result_coupon"></div>
                                     </td>
-                                     <td colspan="1">
-                                        <a class="check-coupon" title="mã giảm giá" onclick="checkCoupon()">Sử dụng</a>
+                                     <td colspan="1" style="border-radius: 5px; text-align: center; background: #0f9ed8;">
+                                        <a class="check-coupon" title="mã giảm giá" onclick="checkCoupon()" style="color: white;font-weight: bold;">Sử dụng</a>
                                     </td>
                                 </tr>
 
@@ -305,6 +305,7 @@ if(!$this->session->userdata('cart')){
                 $('#coupon').attr("placeholder", "Chỉ áp dụng cho thanh toán trực tiếp");
                 $("#coupon").prop('disabled', true);
                 $(".check-coupon").remove()
+                $(".sudungma").remove()
             }else{
                 window.location.reload();
             }

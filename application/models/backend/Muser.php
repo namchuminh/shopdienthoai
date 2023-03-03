@@ -91,4 +91,10 @@ class Muser extends CI_Model {
         return $query->result_array();
     }
 
+    public function getConfig(){
+        $sql = "SELECT * FROM db_config";
+        $result = $this->db->query($sql);
+        return $result->result_array();
+    }
+
 }

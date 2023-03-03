@@ -32,11 +32,11 @@
                     </li>
                     <li class="clearfix">
                         <i class="fa fa-phone"></i>
-                        <span>0385560309</span>
+                        <span>0373685526</span>
                     </li>
                     <li class="clearfix">
                         <i class="fa fa-envelope"></i>
-                        <span><a href="mailto:dohoangkhoi19992812@gmail.com">dohoangkhoi19992812@gmail.com</a></span>
+                        <span>nguyentandung.24h99p@gmail.com</span>
                     </li>
                 </ul>
             </div>
@@ -46,9 +46,9 @@
         <div class="col-xs-12 col-sm-6">
             <h3 class="footer-title">HỖ TRỢ KHÁCH HÀNG</h3>
             <ul class="list-unstyled linklists">
-                <li><a href="chinh-sach">Hướng dẫn thanh toán</a></li>          
-                <li><a href="chinh-sach">Hướng dẫn đặt hàng</a></li>
-                <li><a href="dieu-khoan">Điều khoản</a></li>                   
+                <li>Hướng dẫn thanh toán</li>          
+                <li>Hướng dẫn đặt hàng</li>
+                <li>Điều khoản</li>                   
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6">

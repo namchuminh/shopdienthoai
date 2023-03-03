@@ -6,10 +6,11 @@
 			<div class="products-wrap">
 				<div class="accordion accordion-lg divcenter nobottommargin clearfix" style="max-width: 550px;">
 					<div id="register">
+						<br>
 						<div class="acctitle acctitlec">Đăng ký tài khoản</div>
 						<?php 
 						if(isset($success))
-							echo '<h4 style="color:green;">'.$success.'</h4>';
+							echo '<h5 style="color: #0f9ed8; line-height: 25px; padding-left: 30px;">'.$success.'</h5>';
 						?>
 						<div class="acc_content clearfix" style="display: block;">
 							<form accept-charset="UTF-8" action="" id="customer_register" method="post">

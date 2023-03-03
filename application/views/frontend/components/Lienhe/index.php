@@ -1,48 +1,70 @@
+<?php 
+	$user = $this->session->userdata('sessionKhachHang');
+?>
 <?php echo form_open( base_url()."lien-he"); ?>
+<style>
+	.btn-update-order{
+		background: #0f9ed8; 
+		color: white;
+	}
+	.btn-update-order:hover{
+		background: #00b5ff;
+	}
+</style>
 <section>
 	<div class="container">
 		<div class="col-md-7 col-12">
 			<div class="section-article contactpage" style="  padding-left: 20px;">
-				<?php 
-				echo validation_errors();
-				
-				?>
 				<form accept-charset="UTF-8" action="<?php echo base_url() ?>lien-he" id="contact" method="post">
 					<input name="FormType" type="hidden" value="contact">
 					<input name="utf8" type="hidden" value="true">
 					<h1 style="color: black">Liên hệ với chúng tôi</h1>				
-					
+					<hr style="border-top: 1px solid #eeeeee;">
 					<div class="form-comment">
 						<div class="row" style="padding-left: 14px;">
 							<div class="col-md-4 col-12">
 								<div class="form-group" style="width: 200px;">
 									<label for="name"><em> Họ tên</em><span class="required">*</span></label>
-									<input id="name" name="fullname" type="text" value="" class="form-control">
+									<?php if($this->session->userdata('sessionKhachHang')){ ?>
+										<input id="name" name="fullname" type="text" value="<?php echo $user['fullname']; ?>" class="form-control">
+									<?php }else{  ?>
+										<input id="name" name="fullname" type="text" value="" class="form-control">
+									<?php } ?>
 								</div>
 							</div>
 							<div class="col-md-4 col-12">
 								<div class="form-group" style="width: 200px;">
 									<label for="email"><em> Email</em><span class="required">*</span></label>
-									<input id="email" name="email" class="form-control" type="email" value="">
+									<?php if($this->session->userdata('sessionKhachHang')){ ?>
+										<input id="email" name="email" class="form-control" type="email" value="<?php echo $user['email']; ?>">
+									<?php }else{  ?>
+										<input id="email" name="email" class="form-control" type="email" value="">
+									<?php } ?>
 								</div>
 							</div>
 							<div class="col-md-4 col-12">
 								<div class="form-group" style="width: 200px;">
 									<label for="phone"><em> Số điện thoại</em><span class="required">*</span></label>
-									<input type="number" id="phone" class="form-control" name="phone">
-
+									<?php if($this->session->userdata('sessionKhachHang')){ ?>
+										<input type="number" id="phone" class="form-control" name="phone" value="<?php echo $user['phone']; ?>">
+									<?php }else{  ?>
+										<input type="number" id="phone" class="form-control" name="phone">
+									<?php } ?>
+									
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="message"><em> Tiêu đề</em><span class="required">*</span></label>
-							<textarea id="message" name="title" class="form-control custom-control" rows="2"></textarea>
+							<textarea id="message" name="title" class="form-control custom-control tieude" rows="2"></textarea>
+							<div class="error" id="error_tieude"></div>
 						</div>
 						<div class="form-group">
 							<label for="message"><em> Lời nhắn</em><span class="required">*</span></label>
-							<textarea id="message" name="content" class="form-control custom-control" rows="5"></textarea>
+							<textarea id="message" name="content" class="form-control custom-control loinhan" rows="5"></textarea>
+							<div class="error" id="error_loinhan"></div>
 						</div>
-						<button type="submit" class="btn-update-order" >Gửi nhận xét</button>
+						<button type="submit" class="btn-update-order">Gửi nhận xét</button>
 
 					</div>
 				</form>
@@ -53,6 +75,7 @@
 			padding-left: 32px;
 			">
 			<h1 style="color: black">Thông tin liên hệ</h1>
+			<hr style="border-top: 1px solid #eeeeee;">
 			<ul class="list-unstyled">
 				<li class="clearfix">
 					<i class="fa fa-map-marker fa-1x" style="color:#0f9ed8; padding: 20px; "></i>
@@ -60,22 +83,50 @@
 				</li>
 				<li class="clearfix">
 					<i class="fa fa-phone fa-1x" style="color:#0f9ed8;padding: 20px;  "></i>
-					<span style="color: black">08.335588 - 0981.33557</span>
+					<span style="color: black">0373.685.526 - 0981.33557</span>
 				</li>
 				<li class="clearfix">
 					<i class="fa fa-envelope fa-1x " style="color:#0f9ed8; padding: 20px; "></i>
-					<span style="color: black"><a href="mailto:sale.24hstore@gmail.com">sale.smartstore@gmail.com</a></span>
+					<span style="color: black"><a href="mailto:sale.24hstore@gmail.com">nguyentandung.24h99p@gmail.com</a></span>
 				</li>
 			</ul>
 		</div>
 
 	</div>
-	<div class="col-md-12 col-lg-12 col-xs-12 col-12">
-
-		<div style="margin-top: 15px;">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3919.775145735074!2d106.70436431428682!3d10.75180526258894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1559320476029!5m2!1svi!2s" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-		</div>
-	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".btn-update-order").click(function(e){
+			var TieuDe = $(".tieude").val()
+			var LoiNhan = $(".loinhan").val()
 
+			if(TieuDe == "" && LoiNhan == ""){
+				e.preventDefault()
+				$("#error_tieude").html('<p>Tiêu đề không được để trống !</p>')
+				$("#error_loinhan").html('<p>Lời nhắn không được để trống !</p>')
+				return
+			}
+
+			if(TieuDe == ""){
+				e.preventDefault()
+				$("#error_tieude").html('<p>Tiêu đề không được để trống !</p>')
+			}
+
+			if(LoiNhan == ""){
+				e.preventDefault()
+				$("#error_loinhan").html('<p>Lời nhắn không được để trống !</p>')
+			}
+
+			if (TieuDe.split(' ').length > 100){
+				e.preventDefault()
+				$("#error_tieude").html('<p>Tiêu đề không quá 100 từ!</p>')
+			}
+
+			if (LoiNhan.split(' ').length > 300){
+				e.preventDefault()
+				$("#error_loinhan").html('<p>Lời nhắn không quá 300 từ!</p>')
+			}
+		})
+	});
+</script>
 </section>
