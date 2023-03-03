@@ -63,13 +63,14 @@
 											<td>
 												<?php  
 												$catid = $this->Mcategory->category_parentid($row['id']);
-												$name = $this->Mcategory->category_name_parent($catid);
+												
 												if($catid == 0)
 												{
-													echo '';
+													echo 'Không có';
 												}
 												else
 												{
+													$name = $this->Mcategory->category_name_parent($catid);
 													echo $name;
 												}
 												?>
