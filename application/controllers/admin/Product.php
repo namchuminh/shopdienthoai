@@ -133,11 +133,11 @@ class Product extends CI_Controller {
           }
         }
 
-        public function update($id){
+    public function update($id){
           $user_role=$this->session->userdata('sessionadmin');
-    if($user_role['role']==2){
-      redirect('admin/E403/index','refresh');
-    }
+          if($user_role['role']==2){
+            redirect('admin/E403/index','refresh');
+          }
          $this->data['row']=$this->Mproduct->product_detail($id);
          $d=getdate();
          $today=$d['year']."/".$d['mon']."/".$d['mday']." ".$d['hours'].":".$d['minutes'].":".$d['seconds'];
@@ -161,7 +161,8 @@ class Product extends CI_Controller {
            'price_sale'=>$_POST['price_buy'],
            'modified'=>$today,
            'modified_by'=>$this->session->userdata('id'),
-           'status'=>$_POST['status']
+           'status'=>$_POST['status'],
+           'number' => $_POST['number']
          );
               $this->Mproduct->product_update($mydata, $id);
               $this->session->set_flashdata('success', 'Cập nhật sản phẩm thành công');

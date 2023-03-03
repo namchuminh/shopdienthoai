@@ -27,20 +27,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Email <span class = "maudo">(*)</span></label>
-                                    <input type="email" class="form-control" name="email"" value="<?php echo $row['email'] ?>" disabled>
+                                    <input type="email" class="form-control" name="email"" value="<?php echo $row['email'] ?>" >
                                 </div>
                                 <div class="form-group">
                                     <label>Tên đăng nhập <span class = "maudo">(*)</span></label>
-                                    <input type="text" class="form-control" name="username"" value="<?php echo $row['username']?>" disabled>
+                                    <input type="text" class="form-control" name="username"" value="<?php echo $row['username']?>" >
                                 </div>
                                 <div class="form-group">
                                     <label>Mật khẩu <span class = "maudo">(*)</span></label>
-                                    <input type="password" class="form-control" name="password"">
+                                    <input type="password" class="form-control" name="password"" placeholder="Nhập mật khẩu cũ hoặc mật khẩu mới..">
                                     <div class="error" id="password_error"  style="color: red;"><?php echo form_error('password')?></div>
                                 </div>
                                 <div class="form-group">
                                     <label>Điện thoại <span class = "maudo">(*)</span></label>
-                                    <input type="text" class="form-control" name="phone"" value="<?php echo $row['phone'] ?>" disabled>
+                                    <input type="text" class="form-control" name="phone"" value="<?php echo $row['phone'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Địa chỉ <span class = "maudo">(*)</span></label>

@@ -98,7 +98,7 @@ foreach ($listProducer as $r) {
 								</div>
 								<div class="form-group">
 									<label>Số lượng tồn kho</label>
-									<input name="number" class="form-control" type="number" value="<?php echo $row['number'] - $row['number_buy'] ?>" min="1" step="1" max="1000" disabled>
+									<input name="number" class="form-control" type="number" value="<?php echo $row['number'] - $row['number_buy'] ?>" min="1" step="1" max="1000">
 								</div>
 								<div class="form-group">
 									<label>Số lượng đã bán</label>

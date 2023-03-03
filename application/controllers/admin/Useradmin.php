@@ -16,9 +16,6 @@ class Useradmin extends CI_Controller {
 
 	public function index(){
 		$user_role=$this->session->userdata('sessionadmin');
-		if($user_role['role']==2){
-			redirect('admin/E403/index','refresh');
-		}
 		$this->load->library('phantrang');
 		$limit=10;
 		$current=$this->phantrang->PageCurrent();
@@ -83,9 +80,7 @@ class Useradmin extends CI_Controller {
 
 	public function update($id){
 		$user_role=$this->session->userdata('sessionadmin');
-		if($user_role['role']==2){
-			redirect('admin/E403/index','refresh');
-		}
+	
 		$row=$this->Muser->user_detail_id($id);
 		$this->data['row']=$row;
 		$d=getdate();
@@ -101,19 +96,22 @@ class Useradmin extends CI_Controller {
 				'fullname' =>$_POST['fullname'], 
 				'address' =>$_POST['address'], 
 				'password' =>sha1($_POST['password']), 
-				'gender'=>$_POST['gender']
+				'gender'=>$_POST['gender'],
+				'email' => $_POST['email'],
+				'username' => $_POST['username'],
+				'phone' => $_POST['phone'],
 			);
          	$config = array();
-	         $config['upload_path']   = './public/images/admin/';
-	         $config['allowed_types'] = 'jpg|png';
-	         $config['encrypt_name'] = TRUE;
-	         $config['max_size']      = '500';
-	         $config['max_width']     = '1028';
-	         $config['max_height']    = '1028';
-	         $this->load->library('upload', $config);
-	         if($this->upload->do_upload('image')){
-	             $data = $this->upload->data();
-	             $mydata['img']=$data['file_name'];
+	        $config['upload_path']   = './public/images/admin/';
+	        $config['allowed_types'] = 'jpg|png';
+	        $config['encrypt_name'] = TRUE;
+	        $config['max_size']      = '500';
+	        $config['max_width']     = '1028';
+	        $config['max_height']    = '1028';
+	        $this->load->library('upload', $config);
+	        if($this->upload->do_upload('image')){
+	            $data = $this->upload->data();
+	            $mydata['img']=$data['file_name'];
 	         }
 			$this->Muser->user_update($mydata, $id);
 			$this->session->set_flashdata('success', 'Cập nhật tài khoản thành công');
