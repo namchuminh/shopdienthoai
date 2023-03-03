@@ -1,3 +1,4 @@
+
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1><i class="glyphicon glyphicon-cd"></i> Danh sách sản phẩm</h1>
@@ -42,6 +43,8 @@
 							<div class="row" style='padding:0px; margin:0px;'>
 								<!--ND-->
 								<div class="table-responsive" >
+									<input type="text" class="form-control timkiem" placeholder="Nhập tên sản phẩm cần tìm...">
+									<br>
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>
@@ -132,3 +135,29 @@
 			</section>
 			<!-- /.content -->
 		</div><!-- /.content-wrapper -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+	var base_url =  window.location.origin == "http://localhost" ? window.location.origin + "/shopdienthoai" : window.location.origin
+	$(document).ready(function() {
+		$('.timkiem').keyup(function(event) {
+            var tenSanPham = $('.timkiem').val()
+            $.post(base_url+"/admin/product/search",{
+                tenSanPham: tenSanPham
+            },
+            function(data){
+                var dataSearch = JSON.parse(data)
+                console.log(dataSearch)
+                $('tbody').empty()
+                for(var i = 0; i < dataSearch.length; i++){
+                	var stt = '<span class="glyphicon glyphicon-ok-circle mauxanh18"></span>'
+                	if(dataSearch[i].status == 0){
+                		stt = '<span class="glyphicon glyphicon-remove-circle maudo"></span>'
+                	}
+
+                    $('tbody').append('<tr> <td class="text-center">'+dataSearch[i].id+'</td> <td style="width:70px"> <img src="'+base_url+'/public/images/products/'+dataSearch[i].avatar+'" alt="'+dataSearch[i].name+'" class="img-responsive"> </td> <td style="font-size: 16px;">'+dataSearch[i].name+'</td> <td class="text-center"> '+dataSearch[i].number+'</td> <td>'+dataSearch[i].catname+'</td> <td class="text-center"> <a href="'+base_url+'/admin/product/status/'+dataSearch[i].id+'">'+stt+'</a> </td> <td class="text-center"><a class="btn btn-info btn-xs" href="'+base_url+'/admin/product/import/'+dataSearch[i].id+'" role="button"> <span class="glyphicon glyphicon-trash"></span>Nhập hàng </a> </td> <td class="text-center"> <a class="btn btn-success btn-xs" href="'+base_url+'/admin/product/update/'+dataSearch[i].id+'" role="button"> <span class="glyphicon glyphicon-edit"></span> Sửa </a> </td> <td class="text-center"> <a class="btn btn-danger btn-xs" href="'+base_url+'/admin/product/trash/'+dataSearch[i].id+'" onclick="return confirm("Xác nhận xóa sản phẩm này ?")" role="button"> <span class="glyphicon glyphicon-trash"></span> Xóa </a> </td> </tr>')
+                }
+            });
+        })
+
+	});
+</script>

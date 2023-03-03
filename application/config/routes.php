@@ -56,6 +56,8 @@ $route['product/import/(:num)'] ='product/import/$1';
 $route['product/recyclebin'] ='product/recyclebin';
 $route['product/trash/(:num)'] ='product/trash/$1';
 $route['product/recyclebin/(:num)'] ='product/recyclebin/$1';
+$route['admin/product/search'] ='admin/product/search';
+
 
 $route['admin/producer'] ='admin/producer';
 $route['admin/producer/(:num)'] ='admin/producer/index/$1';
@@ -123,6 +125,7 @@ $route['admin/contact'] ='admin/contact/index';
 $route['admin/contact/detail/(:num)'] ='admin/contact/detail/$1';
 $route['admin/contact/(:num)'] ='admin/contact/index/$1';
 $route['admin/contact/recyclebin/(:num)'] ='admin/contact/recyclebin';
+
 
 $route['admin/(:any)']='admin/E403/index';
 $route['admin/403']='admin/E403/index';

@@ -246,24 +246,14 @@ class Product extends CI_Controller {
         $this->data['title']='Cập nhật sản phẩm';
         $this->load->view('backend/layout', $this->data);
       }
-      // public function quicksearch(){
-      // 	$query = '';
-      // 	if($this->input->post('query'))
-      // 	{
-      // 		$query = $this->input->post('query');
-      // 	}
-      // 	$data = $this->Mproduct->get_data_search($query);
-      // 	if($data->num_rows() > 0)
-      // 	{
-      // 		foreach($data->result() as $row)
-      // 		{
-      // 			$this->data['get'] = $row;
-      // 			$this->data['view']='index';
-      // 			$this->load->view('backend/layout', $this->data);
+      public function search(){
+      	if(empty($_POST) || !isset($_POST)){
+          return redirect(base_url('admin/product/'));
+        } 
 
-      // 		}
-      // 	}
-
-
-      // }
+        $tenSanPham = $this->input->post('tenSanPham');
+        $result = $this->Mproduct->searchProduct($tenSanPham);
+        $data = json_encode($result);
+        echo $data;
+      }
     }

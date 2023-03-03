@@ -35,14 +35,53 @@ class Contact extends CI_Controller {
 		$this->session->set_flashdata('success', 'Cập nhật trạng thái thành công');
 		redirect('admin/contact/','refresh');
 	}
-	  public function detail($id)
+	public function detail($id)
     {
-        $this->data['view']='detail';
-		$this->data['title']='mail ';
-		$this->data['row']=$this->Mcontact->contact_status($id);
-		$this->data['row']=$this->Mcontact->contact_detail($id);		
-		$this->data['title']='Quản lý liên hệ ';
-		$this->load->view('backend/layout', $this->data);
+    	if(!empty($_POST) && isset($_POST)){
+    		$tieuDe = $this->input->post('tieuDePH');
+    		$noiDung = $this->input->post('noiDungPH');
+    		$emailKH = $this->input->post('emailKH');
+    		$emailAdmin = $this->input->post('emailAdmin');
+    		$nameAdmin = $this->input->post('nameAdmin');
+        	$this->load->library('email');
+
+            $this->load->library('parser');
+            $this->email->clear();
+
+            $config['protocol'] = 'smtp';
+            $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+            $config['smtp_port'] = '465';
+            $config['smtp_user'] = 'laptrinhtudau@gmail.com';
+            $config['smtp_pass'] = 'qgnkohpnjlrdafxk';
+            $config['charset'] = 'utf-8';
+            $config['newline'] = "\r\n";
+            $config['wordwrap'] = TRUE;
+            $config['mailtype'] = 'html';
+            $config['validation'] = TRUE;   
+            $this->email->initialize($config);
+            $this->email->from($emailAdmin, 'Smart Store - '.$tieuDe);
+            $this->email->to($emailKH);
+            $this->email->subject($tieuDe);
+            $this->email->message($noiDung.'<br> <p>Nhân viên hỗ trợ<br>'.$nameAdmin.'</p>');
+            $this->email->send();
+
+            $this->session->set_flashdata('success', 'Phản hồi khách hàng thành công!');
+            $this->data['view']='detail';
+			$this->data['title']='mail ';
+			$this->data['row']=$this->Mcontact->contact_status($id);
+			$this->data['row']=$this->Mcontact->contact_detail($id);		
+			$this->data['title']='Quản lý liên hệ ';
+			$this->data['content'] = $noiDung;
+			$this->data['titlePH'] = $tieuDe;
+			$this->load->view('backend/layout', $this->data);
+        }else{
+        	$this->data['view']='detail';
+			$this->data['title']='mail ';
+			$this->data['row']=$this->Mcontact->contact_status($id);
+			$this->data['row']=$this->Mcontact->contact_detail($id);		
+			$this->data['title']='Quản lý liên hệ ';
+			$this->load->view('backend/layout', $this->data);
+        }
     }
     public function delete($id)
 	{

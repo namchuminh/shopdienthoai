@@ -65,12 +65,12 @@
 													</td>
 													<td class="text-center">
 														<a class="btn btn-info btn-xs" href="<?php echo base_url() ?>admin/contact/detail/<?php echo $row['id'] ?>" role = "button">
-															<span class="glyphicon glyphicon-trash"></span>Xem
+															<span class="glyphicon glyphicon-trash"></span> Xem & Phản hồi
 														</a>
 													</td>
 													<td class="text-center">
 														<a class="btn btn-danger btn-xs" href="<?php echo base_url() ?>admin/contact/trash/<?php echo $row['id'] ?>" onclick="return confirm('Xác nhận xóa liên hệ này ?')" role = "button">
-															<span class="glyphicon glyphicon-trash"></span>Xóa
+															<span class="glyphicon glyphicon-trash"></span> Xóa
 														</a>
 													</td>
 												</tr>

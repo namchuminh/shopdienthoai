@@ -88,8 +88,15 @@ class Mproduct extends CI_Model {
         {
             $this->db->like('name', $query);
         }
-            $this->db->order_by('id', 'desc');
-            return $this->db->get();
+        $this->db->order_by('id', 'desc');
+        return $this->db->get();
+    }
+
+    public function searchProduct($tenSanPham){
+        $tenSanPham = "%".$tenSanPham."%";
+        $sql = "SELECT db_product.id,db_product.avatar,db_product.name,db_product.number,db_category.name AS catname,db_product.status FROM db_product, db_category WHERE db_product.catid = db_category.id AND db_product.name LIKE '".$tenSanPham."' LIMIT 10";
+        $result = $this->db->query($sql);
+        return $result->result_array();
     }
 
 }
