@@ -33,6 +33,8 @@
 							<div class="row" style='padding:0px; margin:0px;'>
 								<!--ND-->
 								<div class="table-responsive">
+									<input type="text" class="form-control timkiem" placeholder="Tìm kiếm đơn hàng theo Code hoặc SDT...">
+									<br>
 									<table class="table table-hover table-bordered" style="font-size: 0.9em;">
 										<thead>
 											<tr>
@@ -128,3 +130,53 @@
 			<!-- /.row -->
 		</section>
 	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+	var base_url =  window.location.origin == "http://localhost" ? window.location.origin + "/shopdienthoai" : window.location.origin
+	function formatCash(str) {
+	 	return str.split('').reverse().reduce((prev, next, index) => {
+	 		return ((index % 3) ? next : (next + ',')) + prev
+	 	})
+	}
+	$(document).ready(function() {
+		$('.timkiem').keyup(function(event) {
+            var timkiem = $('.timkiem').val()
+            $.post(base_url+"/admin/orders/search",{
+                timkiem: timkiem
+            },
+            function(data){
+                var dataSearch = JSON.parse(data)
+                console.log(dataSearch)
+                $('tbody').empty()
+                for(var i = 0; i < dataSearch.length; i++){
+                	var stt = '<a class="btn btn-default btn-xs" href="'+base_url+'/admin/orders/status/'+dataSearch[i].id+'" onclick="return confirm("Xác nhận gói hàng và chuẩn bị giao hàng ?")" role="button"> <i class="fa fa-check-square-o"></i> Duyệt đơn đặt hàng </a>'
+
+                	var trangThai = "Đang chờ duyệt"
+                	var huyDon = '<a class="btn btn-danger btn-xs" href="'+base_url+'/admin/orders/cancelorder/'+dataSearch[i].id+'" onclick="return confirm("Xác nhận hủy đơn hàng này ?")" role="button"> <i class="fa fa-save"></i> Hủy đơn </a>'
+                	if(dataSearch[i].status == 1){
+                		var stt = '<a class="btn btn-success btn-xs" href="'+base_url+'/admin/orders/status/'+dataSearch[i].id+'" onclick="return confirm("Xác nhận đơn hàng đã giao và thanh toán thành công ?")" role="button"> <i class="fa  fa-thumbs-o-up"></i> Xác nhận thanh toán </a>'
+                		var huyDon = '<a class="btn btn-danger btn-xs" href="'+base_url+'/admin/orders/cancelorder/'+dataSearch[i].id+'" onclick="return confirm("Xác nhận hủy đơn hàng này ?")" role="button"> <i class="fa fa-save"></i> Hủy đơn </a>'
+                		var trangThai = "Đang giao hàng"
+                	}else if(dataSearch[i].status == 2){
+                		var stt = ''
+                		var trangThai = "Đã giao"
+                		var huyDon = ''
+                	}else if (dataSearch[i].status == 3) {
+                		var stt = ''
+                		var trangThai = "Khách hàng đã hủy"
+                		var huyDon = ''
+                	}else if(dataSearch[i].status == 4){
+                		var stt = ''
+                		var trangThai = "Nhân viên đã hủy"
+                		var huyDon = ''
+                	}
+
+                	var money = formatCash(dataSearch[i].money)
+
+                    $('tbody').append('<tr> <td class="text-center">'+dataSearch[i].orderCode+'</td> <td>'+dataSearch[i].fullname+'</td> <td>'+dataSearch[i].phone+'</td> <td>'+money+'₫</td> <td>'+dataSearch[i].orderdate+'</td> <td style="text-align: center;"> '+trangThai+' </td> <td style="text-align: center;">'+stt+'</td><td>'+huyDon+'</td> <td class="text-center"> <!-- /Xem --> <a class="btn btn-info btn-xs" href="'+base_url+'/admin/orders/detail/'+dataSearch[i].id+'" role="button"> <span class="glyphicon glyphicon-eye-open"></span> Xem </a> <!-- /Xóa --> <a class="btn bg-olive btn-xs" href="'+base_url+'/admin/orders/trash/'+dataSearch[i].id+'" onclick="return confirm("Xác nhận lưu đơn hàng này ?")" role="button"> <i class="fa fa-save"></i> Lưu đơn </a> </td> </tr>')
+                }
+            });
+        })
+
+	});
+</script>

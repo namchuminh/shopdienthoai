@@ -141,4 +141,15 @@ class Orders extends CI_Controller {
     }
   }
 
+  public function search(){
+    if(empty($_POST) || !isset($_POST)){
+      return redirect(base_url('admin/orders/'));
+    } 
+
+    $timkiem = $this->input->post('timkiem');
+    $result = $this->Morders->searchOrders($timkiem);
+    $data = json_encode($result);
+    echo $data;
+  }
+
 }

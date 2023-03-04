@@ -115,6 +115,7 @@ $route['customer/restore/(:num)'] ='customer/restore/$1';
 // ql don hang
 $route['admin/orders'] ='admin/orders';
 $route['admin/orders/(:num)'] ='admin/orders/index/$1';
+$route['admin/orders/search'] ='admin/orders/search';
 //ql tk nv
 $route['admin/useradmin']='admin/useradmin/index';
 $route['admin/useradmin/(:num)'] ='admin/useradmin/index/$1';

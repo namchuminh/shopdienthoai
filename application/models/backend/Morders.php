@@ -130,4 +130,17 @@ class Morders extends CI_Model {
         return count($query->result_array());
     }
 
+    public function searchOrders($timkiem){
+        if(is_numeric($timkiem) == 1){
+            $timkiem = "%".$timkiem."%";
+            $sql = "SELECT * FROM `db_order` WHERE phone LIKE '".$timkiem."' ORDER BY id DESC LIMIT 10";
+            $result = $this->db->query($sql);
+            return $result->result_array();
+        }else{
+            $timkiem = "%".$timkiem."%";
+            $sql = "SELECT * FROM `db_order` WHERE orderCode LIKE '".$timkiem."' ORDER BY id DESC LIMIT 10";
+            $result = $this->db->query($sql);
+            return $result->result_array();
+        }
+    }
 }
