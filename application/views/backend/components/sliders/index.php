@@ -51,11 +51,11 @@
 											<td style="width:100px">
 												<img src="public/images/banners/<?php echo $row['img'] ?>" class="img-responsive">
 											</td>
-											<td><a href="<?php echo base_url() ?>admin/sliders/update/<?php echo $row['id'] ?>"><?php echo $row['name'] ?></a>
+											<td><a href="<?php echo base_url('admin/sliders/update/'.$row['id']) ?>"><?php echo $row['name'] ?></a>
 											</td>
 											<td> <?php echo $row['link'] ?></td>
 											<td class="text-center">
-												<a href="<?php echo base_url() ?>admin/sliders/status/<?php echo $row['id'] ?>">
+												<a href="<?php echo base_url('admin/sliders/status/'.$row['id']) ?>">
 													<?php if($row['status']==1):?>
 														<span class="glyphicon glyphicon-ok-circle mauxanh18"></span>
 													<?php else: ?>
@@ -63,18 +63,16 @@
 													<?php endif; ?>
 												</a>
 											</td>
-											<?php
-												if($user['role']==1){
-													echo '<td class="text-center">
-												<a class="btn btn-success btn-xs" href="<?php echo base_url() ?>admin/sliders/update/'.$row['id'].'" role = "button">
-													<span class="glyphicon glyphicon-edit"></span>Sửa
-												</a>
-											</td>';
-												}
-												?>
+											<?php if($user['role']==1){ ?>
+												<td class="text-center">
+													<a class="btn btn-success btn-xs" href="<?php echo base_url('admin/sliders/update/'.$row['id']) ?>" role = "button">
+														<span class="glyphicon glyphicon-edit"></span>Sửa
+													</a>
+												</td>
+											<?php } ?>
 											
 											<td class="text-center">
-												<a class="btn btn-danger btn-xs" href="<?php echo base_url() ?>admin/sliders/trash/<?php echo $row['id'] ?>" onclick="return confirm('Xác nhận xóa slider này ?')" role = "button">
+												<a class="btn btn-danger btn-xs" href="<?php echo base_url('admin/sliders/trash/').$row['id'] ?>" onclick="return confirm('Xác nhận xóa slider này ?')" role = "button">
 													<span class="glyphicon glyphicon-trash"></span>Xóa
 												</a>
 											</td>
