@@ -6,6 +6,14 @@ class Mcategory extends CI_Model {
         $this->table = $this->db->dbprefix('category');
     }
 
+    public function all_category(){
+        $this->db->where('level !=', 1);
+        $this->db->where('status', 1);
+        $this->db->where('trash', 1);
+        $query = $this->db->get($this->table);
+        return $query->result_array();
+    }
+
     public function category_id($link)
     {
         $this->db->where('link', $link);

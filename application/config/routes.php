@@ -138,3 +138,6 @@ $route['translate_uri_dashes'] = FALSE;
 //vnpay
 $route['thanh-toan/vnpay'] = 'Vnpay/index';
 $route['thanh-toan/ket-qua-vnpay'] = 'Vnpay/returnPay';
+
+//khách hàng bán
+$route['khach-hang/ban-san-pham'] = 'Khachhang/postProduct';

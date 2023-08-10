@@ -54,6 +54,7 @@
 												<th>Số lượng trong kho</th>
 												<th>Loại sản phẩm</th>
 												<th class="text-center">Trạng thái</th>
+												<th class="text-center">Người bán</th>
 												<th class="text-center">Nhập hàng</th>
 												<th class="text-center" colspan="2">Thao tác</th>
 											</tr>
@@ -73,13 +74,27 @@
 													<td><?php echo $namecat ?></td>
 													<td class="text-center">
 														<a href="<?php echo base_url() ?>admin/product/status/<?php echo $row['id'] ?>">
-															<?php if($row['status']==1):?>
-																<span class="glyphicon glyphicon-ok-circle mauxanh18"></span>
-																<?php else: ?>
-																	<span class="glyphicon glyphicon-remove-circle maudo"></span>
-																<?php endif; ?>
-															</a>
-														</td>
+														<?php if($row['status']==1):?>
+															<span class="glyphicon glyphicon-ok-circle mauxanh18"></span>
+															<br>
+															<span>Đang giao bán</span>
+															<?php else: ?>
+																<span class="glyphicon glyphicon-remove-circle maudo"></span>
+																<br>
+																<span>Chưa được bán</span>
+															<?php endif; ?>
+														</a>
+													</td>
+													<td class="text-center">
+														<?php 
+															if(empty($row['idcustomer']) || $row['idcustomer'] == NULL){
+																echo "Cửa Hàng";
+															}else{
+																echo "MKH: ".$row['cId']." - ".$row['fullname']; 
+															}
+															
+														?>
+													</td>
 														<?php  
 														$quyen='';
 														if($user['role']==1){

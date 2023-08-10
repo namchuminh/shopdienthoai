@@ -6,6 +6,10 @@ class Mproduct extends CI_Model {
         $this->table = $this->db->dbprefix('product');
     }
 
+    public function Khachhang_post($mydata){
+        return $this->db->insert($this->table,$mydata);
+    }
+
     //Trang chủ
     public function product_home_limit($listcat, $limit)
     {

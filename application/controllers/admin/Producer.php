@@ -116,10 +116,15 @@ class Producer extends CI_Controller {
 	}
 
 	public function trash($id){
-		$mydata= array('trash' => 0);
-		$this->Mproducer->producer_update($mydata, $id);
-		$this->session->set_flashdata('success', 'Xóa nhà cung cấp vào thùng rác thành công');
-		redirect('admin/producer','refresh');
+		if($id == 5){
+			$this->session->set_flashdata('success', 'Không được phép xóa nhà cung cấp này!');
+			redirect('admin/producer','refresh');
+		}else{
+			$mydata= array('trash' => 0);
+			$this->Mproducer->producer_update($mydata, $id);
+			$this->session->set_flashdata('success', 'Xóa nhà cung cấp vào thùng rác thành công');
+			redirect('admin/producer','refresh');
+		}
 	}
 
 	public function restore($id)
@@ -130,9 +135,15 @@ class Producer extends CI_Controller {
 	}
 	public function delete($id)
 	{
-		$this->Mproducer->producer_delete($id);
-		$this->session->set_flashdata('success', 'Xóa nhà cung cấp thành công');
-		redirect('admin/producer/recyclebin','refresh');
+		if($id == 5){
+			$this->session->set_flashdata('success', 'Không được phép xóa nhà cung cấp này!');
+			redirect('admin/producer/recyclebin','refresh');
+		}else{
+			$this->Mproducer->producer_delete($id);
+			$this->session->set_flashdata('success', 'Xóa nhà cung cấp thành công');
+			redirect('admin/producer/recyclebin','refresh');
+		}
+		
 	}
 
 }

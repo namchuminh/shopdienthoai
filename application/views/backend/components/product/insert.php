@@ -116,5 +116,4 @@
 		  <!-- /.row -->
 		</section>
 	</form>
-<!-- /.content -->
-</div><!-- /.content-wrapper -->
+</div>

@@ -27,10 +27,8 @@
     <link href="public/css/style.css" rel="stylesheet">
     <link href="public/css/jquery.bxslider.css" rel="stylesheet">
     <link href="public/css/flexslider.css" rel="stylesheet">
-
-    
-    
-        <script src="public/js/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="public/js/jquery-2.2.3.min.js"></script>
     </head>
     <body>
         <div class='thetop'></div>

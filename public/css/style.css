@@ -393,14 +393,14 @@
 .nav>li>a {
 	position: relative;
 	display: block;
-	padding: 10px 15px;
+	padding: 10px 25px;
 	font-size: 0.9em;
-	color: #685e52; !important;
+	color: white; !important;
 }
 
 .nav>li>a:hover{
-	color: #000;
-	background-color: none;
+	color: white;
+	background-color: #0f9ed8;
 }
 
 .icon-cart-mobile{
@@ -2241,4 +2241,8 @@ a.fright {
 	-ms-transform: scale(1.1);
 	-o-transform: scale(1.1);
 	transform: scale(1.1);
+}
+
+#header{
+	background: #0f9ed8;
 }

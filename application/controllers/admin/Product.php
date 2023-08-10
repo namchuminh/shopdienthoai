@@ -122,16 +122,16 @@ class Product extends CI_Controller {
            }
          }
 
-         function check(){
-           $giaban= $this->input->post('price_buy');
-           $giagoc= $this->input->post('price_root');
-           if($giaban>$giagoc){
-            $this->form_validation->set_message(__FUNCTION__,'Bạn phải nhập giá bán nhỏ hơn hoặc bằng giá gốc');
-            return FALSE;
-          }else{
-            return true;
-          }
-        }
+    function check(){
+      $giaban= $this->input->post('price_buy');
+      $giagoc= $this->input->post('price_root');
+      if($giaban>$giagoc){
+        $this->form_validation->set_message(__FUNCTION__,'Bạn phải nhập giá bán nhỏ hơn hoặc bằng giá gốc');
+        return FALSE;
+      }else{
+        return true;
+      }
+    }
 
     public function update($id){
           $user_role=$this->session->userdata('sessionadmin');

@@ -17,9 +17,8 @@ class Mproduct extends CI_Model {
     }
     public function product_sanpham($limit,$first)
     {
-        $this->db->where('trash', 1);
-        $this->db->order_by('id', 'desc');
-        $query = $this->db->get($this->table, $limit,$first);
+        $sql = "SELECT db_product.*, db_customer.id AS cId, db_customer.fullname FROM `db_product` LEFT JOIN db_customer ON db_product.idcustomer = db_customer.id WHERE db_product.trash = 1 ORDER BY db_product.id DESC LIMIT ?, ?";
+        $query = $this->db->query($sql, array($first,$limit));
         return $query->result_array();
     }
     //detail
