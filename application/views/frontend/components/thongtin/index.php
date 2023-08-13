@@ -11,7 +11,17 @@
                     <p>Email: <strong><?php echo $info['email'] ?></strong></p>
                     <p>Số điện thoại: <strong><?php echo $info['phone'] ?></strong></p>
                 </div>
-                <button class="btn"><a href="reset_password">Đổi mật khẩu</a></button>
+                <br>    
+                <div> 
+                    <button class="btn"><a href="<?php echo base_url('khach-hang/ban-san-pham/'); ?>">Đăng sản phẩm</a></button>
+                    <button class="btn"><a href="<?php echo base_url('khach-hang/san-pham/'); ?>">Quản lý sản phẩm</a></button>
+                </div>
+                <br>
+                <div>
+                    <button class="btn"><a href="reset_password">Đổi mật khẩu</a></button>
+                    <button class="btn"><a href="<?php echo base_url('dang-xuat/'); ?>">Đăng xuất</a></button>
+                </div>    
+                
             </div>
         </aside>
         <div class="col-main col-md-9 col-sm-12">
@@ -25,12 +35,12 @@
                     <table style="padding-right: 10px; width: 100%;">
                         <thead style="border: 1px solid silver;">
                             <tr>
-                                <th class="text-left" style="width: 85px; padding:5px 10px">Đơn hàng</th>
-                                <th style="width: 110px; padding:5px 10px">Ngày</th>
-                                <th style="width: 150px;text-align: center; padding:5px 10px">
+                                <th class="text-left" style="padding:5px 10px">Đơn hàng</th>
+                                <th style="padding:5px 10px">Ngày</th>
+                                <th style="text-align: center; padding:5px 10px">
                                     Giá trị đơn hàng 
                                 </th>
-                                <th style="width: 150px; text-align: center;">Trạng thái đơn hàng</th>
+                                <th style="text-align: center;">Trạng thái đơn hàng</th>
                                 <th style="text-align: center;" colspan="2">Thao tác</th>
                             </tr>
                         </thead>
@@ -72,16 +82,17 @@
                 <table style="padding-right: 10px; width: 100%;">
                     <thead style="border: 1px solid silver;">
                         <tr>
-                            <th class="text-left" style="width: 85px; padding:5px 10px">Đơn hàng</th>
-                            <th style="width: 110px; padding:5px 10px">Ngày</th>
-                            <th style="width: 150px;text-align: center; padding:5px 10px">
+                            <th class="text-left" style="padding:5px 10px">Đơn hàng</th>
+                            <th style="padding:5px 10px">Ngày</th>
+                            <th style="text-align: center; padding:5px 10px">
                                 Giá trị đơn hàng 
                             </th>
-                            <th style="width: 150px; text-align: center;">Trạng thái đơn hàng</th>
+                            <th style="text-align: center;">Trạng thái đơn hàng</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody style="border: 1px solid silver;">
+                        <?php $i = 0 ?>
                         <?php $order = $this->Minfocustomer->order_listorder_customerid($info['id']);
                         foreach ($order as $value):?>
                             <tr style="border-bottom: 1px solid silver;">
@@ -114,10 +125,14 @@
                                 <span> <a style="color: #0f9ed8;" href="account/orders/<?php echo $value['id'] ?>">Xem chi tiết</a></span>
                             </td>
                         </tr>
+                        <?php $i++; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-
+            <?php if($i == 0){ ?>
+                <br>
+                <p class="text-center">Danh sách đơn hàng của bạn đang trống!</p>
+            <?php } ?>
 
         </div>
     </div>

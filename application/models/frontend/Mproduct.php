@@ -6,6 +6,20 @@ class Mproduct extends CI_Model {
         $this->table = $this->db->dbprefix('product');
     }
 
+    public function product_detail_update($id)
+    {     
+        $this->db->where('trash', 1);
+        $this->db->where('id', $id);
+        $this->db->limit(1);
+        $query = $this->db->get($this->table);
+        return $query->result_array();   
+    }
+
+    public function Khachang_sanpham_update($id, $mydata){
+        $this->db->where('id', $id);
+        return $this->db->update($this->table, $mydata);
+    }
+
     public function Khachhang_post($mydata){
         return $this->db->insert($this->table,$mydata);
     }
@@ -153,5 +167,30 @@ class Mproduct extends CI_Model {
         $this->db->where('trash', 1);
         $query = $this->db->get($this->table);
         return $query->result_array();
+    }
+
+    public function get_product_KH($id){
+        $this->db->where('trash', 1);
+        $this->db->where('idcustomer', $id);
+        $query = $this->db->get($this->table);
+        return $query->result_array();
+    }
+
+    public function get_detail_product_kh($id){
+        $this->db->select('db_product.*, db_category.id, db_category.name AS catename');
+        $this->db->from('db_product');
+        $this->db->join('db_category', 'db_product.catid = db_category.id');
+        $this->db->where('db_product.trash', 1);
+        $this->db->where('db_product.status', 1);
+        $this->db->where('db_product.id', $id);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
+    public function product_update($mydata,$id)
+    {
+        $this->db->where('id',$id);
+        $this->db->update($this->table, $mydata);
     }
 }

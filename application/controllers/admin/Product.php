@@ -198,7 +198,7 @@ class Product extends CI_Controller {
          public function trash($id){
            $row = $this->Morderdetail->orderdetail_detail($id);
            if(count($row) > 0){
-            $this->session->set_flashdata('error', 'Đã có khách hàng đặt mua, không thể xóa !');
+            $this->session->set_flashdata('success', 'Đã có khách hàng đặt mua, không thể xóa !');
             redirect('admin/product','refresh');
           }else{
             $mydata= array('trash' => 0,'modified_by'=>$this->session->userdata('id'),);

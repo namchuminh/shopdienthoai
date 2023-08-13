@@ -31,7 +31,7 @@
         <div class="col-main col-md-9 col-sm-12">
             <div class="my-account">
                 <div class="general__title">
-                    <h2 style="text-align: center; font-size: 20px;"><span>Thông Tin Sản Phẩm</span></h2>
+                    <h2 style="text-align: center; font-size: 20px;"><span>Cập Nhật Thông Tin Sản Phẩm</span></h2>
                 </div>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="text-center">
@@ -49,11 +49,11 @@
                     <div class="row d-flex justify-content-between mb-3 ">
                       <div class="col-md-7">
                         <label for="tsp" class="form-label">Tên sản phẩm <span>(*)</span> </label>
-                        <input type="text" class="form-control" id="tsp" name="name" required>
+                        <input type="text" class="form-control" id="tsp" name="name" required value="<?php echo $product[0]['name']; ?>">
                       </div>
                       <div class="col-md-4">
                         <label for="gg" class="form-label">Giá gốc <span>(*)</span></label>
-                        <input type="number" class="form-control" id="gg" min="0" value="0" name="price_root" required>
+                        <input type="number" class="form-control" id="gg" min="0" name="price_root" required value="<?php echo $product[0]['price']; ?>">
                       </div>
                     </div>
 
@@ -64,54 +64,67 @@
                             <label for="lsp" class="form-label">Loại sản phẩm <span>(*)</span> </label>
                             <select class="form-select form-control" id="lsp" name="catid">
                               <?php foreach ($category as $key => $value): ?>
-                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                <?php if($value['id'] == $product[0]['catid']){ ?>
+                                  <option value="<?php echo $value['id']; ?>" selected><?php echo $value['name']; ?></option>
+                                <?php }else{ ?>
+                                  <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                <?php } ?>
                               <?php endforeach ?>
                             </select>
                           </div>
                           <div class="col-md-5">
                             <label for="sl" class="form-label">Số lượng<span>(*)</span> </label>
-                            <input type="number" min="1" value="0" class="form-control" id="sl" name="number" required>
+                            <input type="number" min="1" value="<?php echo $product[0]['number']; ?>" class="form-control" id="sl" name="number" required>
                           </div>
                         </div>  
                       </div>
                       <div class="col-md-4">
                         <label for="gb" class="form-label">Giá bán <span>(*)</span></label>
-                        <input type="number" class="form-control" id="gb" min="0" value="0" name="price_buy" required>
+                        <input type="number" class="form-control" id="gb" min="0" value="<?php echo $product[0]['price_sale']; ?>" name="price_buy" required>
                       </div>
                     </div>
 
                     <div class="row d-flex justify-content-between mb-3 ">
                       <div class="col-md-7">
                         <label for="tsp" class="form-label">Mô tả ngắn <span>(*)</span> </label>
-                        <textarea class="form-control" rows="3" name="sortDesc" required></textarea>
+                        <textarea class="form-control" rows="3" name="sortDesc" required><?php echo $product[0]['sortDesc']; ?></textarea>
                       </div>
                       <div class="col-md-4">
                         <label for="km" class="form-label">Khuyến mãi <span>(*)</span></label>
-                        <input type="text" class="form-control" id="km" value="0%" disabled required>
+                        <input type="text" class="form-control" id="km" value="<?php echo $product[0]['sale']; ?>%" disabled required>
                       </div>
                     </div>
 
                     <div class="row d-flex justify-content-between mb-3 ">
                       <div class="col-md-8">
                         <label for="detail" class="form-label">Mô tả chi tiết <span>(*)</span></label>
-                        <textarea id="detail" class="form-control" name="detail" required></textarea>
+                        <textarea id="detail" class="form-control" name="detail" required><?php echo $product[0]['detail']; ?></textarea>
                         <script> CKEDITOR.replace('detail', { height: '500px' }); </script>
                       </div>
                       <div class="col-md-3">
                           <div class="col-md-12 mb-3">
-                              <label for="anhchinh" class="form-label">Ảnh chính <span>(*)</span></label>
-                              <input type="file" id="anhchinh" class="form-control" name="avatar">
+                              <label for="slt" class="form-label">Số lượng tồn kho</label>
+                              <input type="text" id="slt" class="form-control" value="<?php echo $product[0]['number']; ?> sản phẩm" disabled>
+                          </div>
+
+                          <div class="col-md-12 mb-3">
+                              <label for="slb" class="form-label">Số lượng đã bán</label>
+                              <input type="text" id="slb" class="form-control" disabled value="<?php echo $product[0]['number_buy']; ?> sản phẩm">
                           </div>
 
                           <div class="col-md-12">
-                              <label for="anhphu" class="form-label">Ảnh sản phẩm<span>(*)</span></label>
-                              <input type="file" id="anhphu" class="form-control" name="images[]" multiple>
+                              <label for="slb" class="form-label">Trạng Thái</label>
+                              <?php if($product[0]['status'] == 1){ ?>
+                                <input type="text" id="slb" class="form-control" disabled value="Đang giao bán">
+                              <?php }else{ ?>
+                                <input type="text" id="slb" class="form-control" disabled value="Chưa giao bán">
+                              <?php } ?>
                           </div>
                       </div>
                     </div>
                     <div class="text-right">
                       <a href="<?php echo base_url('khach-hang/san-pham/'); ?>" class="btn btn-secondary">Quay Lại</a>
-                      <button type="submit" class="btn btn-primary">Đăng Sản Phẩm</button>
+                      <button type="submit" class="btn btn-primary">Cập Nhật Sản Phẩm</button>
                     </div>
                   </form>
             </div>
@@ -182,6 +195,9 @@
 
   li span{
     color: black;
+  }
+  .form-control:disabled{
+    background: #eeeeee;
   }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

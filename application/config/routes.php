@@ -141,3 +141,8 @@ $route['thanh-toan/ket-qua-vnpay'] = 'Vnpay/returnPay';
 
 //khách hàng bán
 $route['khach-hang/ban-san-pham'] = 'Khachhang/postProduct';
+$route['khach-hang/san-pham'] = 'Khachhang/index';
+$route['khach-hang/nhap-hang/(:any)'] = 'Khachhang/importNumber/$1';
+$route['khach-hang/ngung-ban/(:any)'] = 'Khachhang/status/$1';
+$route['khach-hang/xoa-san-pham/(:any)'] = 'Khachhang/recyclebin/$1';
+$route['khach-hang/sua-san-pham/(:any)'] = 'Khachhang/updateProduct/$1';

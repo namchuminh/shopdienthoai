@@ -45,7 +45,15 @@
 												<img src="public/images/products/<?php echo $row['avatar'] ?>" alt="<?php echo $row['name'] ?>" class="img-responsive">
 											</td>
 											<td><?php echo $row['name'] ?></td>
-											<td><?php $name=$this->Muser->user_name($row['created_by']); echo $name; ?></td>
+											<td>
+												<?php 
+													if($row['idcustomer'] != NULL){
+														echo "MKH: ".$row['idcustomer']. " - ".$this->Muser->customer_name($row['idcustomer']); 
+													}else{
+														echo $this->Muser->user_name($row['created_by']); 
+													}	
+												?>
+											</td>
 											<td class="text-center">
 												<a class="btn btn-success btn-xs" href="admin/product/restore/<?php echo $row['id'] ?>" role = "button">
 													<span class="glyphicon glyphicon-edit"></span> Khôi phục

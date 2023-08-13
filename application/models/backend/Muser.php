@@ -20,6 +20,15 @@ class Muser extends CI_Model {
         	return FALSE;
         }	
     }
+
+    public function customer_name($id){
+        $this->db->where('id',$id);
+        $this->db->limit(1);
+        $query = $this->db->get('db_customer');
+        $row=$query->row_array();
+        return $row['fullname'];
+    }
+
     //index
     public function users_all($limit, $first){
         $this->db->where('trash', 1);

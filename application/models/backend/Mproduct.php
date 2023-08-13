@@ -98,4 +98,9 @@ class Mproduct extends CI_Model {
         return $result->result_array();
     }
 
+    public function product_delete_detail($id){
+        $this->db->where('id', $id);
+        return $this->db->delete($this->table);
+    }
+
 }
