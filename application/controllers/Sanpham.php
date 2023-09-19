@@ -117,16 +117,21 @@ class Sanpham extends CI_Controller {
     public function update(){
         $this->load->library('session');
         $id=$_POST['id'];
-        if($this->session->userdata('cart')){
-            $cart=$this->session->userdata('cart');
-            if(array_key_exists($id, $cart)){
-                $cart[$id]=(int)($_POST['sl']);
-            }
-        }
-        $this->session->set_userdata('cart',$cart);
-        echo json_encode( $cart );
-    }
+        $sl=$_POST['sl'];
 
+        if(count($this->Mproduct->checkNumberProduct($id, $sl)) >= 1){
+            if($this->session->userdata('cart')){
+                $cart=$this->session->userdata('cart');
+                if(array_key_exists($id, $cart)){
+                    $cart[$id]=(int)($_POST['sl']);
+                }
+            }
+            $this->session->set_userdata('cart',$cart);
+            echo json_encode( $cart );
+        }else{
+            echo json_encode(false);
+        }
+    }
     public function remove(){
         $this->load->library('session');
         $id=$_POST['id'];
