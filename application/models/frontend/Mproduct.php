@@ -6,6 +6,13 @@ class Mproduct extends CI_Model {
         $this->table = $this->db->dbprefix('product');
     }
 
+    public function checkNumberProduct($id, $sl)
+    {     
+        $query = "SELECT * FROM db_product WHERE id = ? AND number >= ?";
+        $result = $this->db->query($query, array($id, $sl));
+        return $result->result_array();   
+    }
+
     public function product_detail_update($id)
     {     
         $this->db->where('trash', 1);
